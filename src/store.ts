@@ -54,8 +54,6 @@ export const store = createStore({
 					});
 				}
 				dispatch("eventListener");
-			} else {
-				alert("Please install Metamask");
 			}
 		},
 		eventListener({ commit }) {
