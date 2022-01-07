@@ -2,7 +2,7 @@
 	<div class="form">
 		<div class="form__card">
 			<div class="card">
-				<img src="eth.png" alt="" class="card__img" />
+				<img src="../../public/eth.png" alt="" class="card__img" />
 				<h5>Connected</h5>
 				<h6>{{ account }}</h6>
 				<h3>Ethereum</h3>
