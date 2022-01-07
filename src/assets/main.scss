@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@200;300;400;600&display=swap");
+$font-general: "Work Sans", -apple-system, sans-serif;
+
+// -------
+// Weights
+// -------
+$font-weight-regular: 300;
+$font-weight-medium: 400;
+$font-weight-heavy: 600;
+
+// ------------
+// Header Sizes
+// ------------
+$header-regular: 1.5em;
+
+// ----------
+// Font Sizes
+// ----------
+$font-regular: 1em;
+$font-small: 0.9em;
+
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+	outline: none;
+}
+
+html {
+	margin: 0;
+	font-size: 62.5%;
+	overflow: hidden;
+}
+body {
+	margin: 0;
+	font-family: $font-general;
+	font-size: 1.6rem;
+	font-weight: $font-weight-regular;
+}
+
+// ---------------------------
+// Prevent Autofill Background
+// ---------------------------
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+	transition: background-color 50000s ease-in-out 0s;
+}
+
+button {
+	font-family: "Work Sans", -apple-system, sans-serif;
+	font-size: 1.6rem;
+	cursor: pointer;
+	align-items: center;
+	column-gap: 0.7rem;
+	border: none;
+	background: linear-gradient(to right bottom, #743ad5, #d53a9d);
+	padding: 1rem 1.5rem;
+	color: #ebebeb;
+	text-align: center;
+}
