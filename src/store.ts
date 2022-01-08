@@ -6,11 +6,6 @@ declare let window: any;
 declare let transactionHash: any;
 const { ethereum } = window;
 
-if (ethereum) {
-	const provider = new ethers.providers.Web3Provider(ethereum);
-	const signer = provider.getSigner();
-}
-
 export const store = createStore({
 	state: {
 		connected: false,
@@ -45,6 +40,8 @@ export const store = createStore({
 			}
 		},
 		async fetchBalance({ state, commit }) {
+			const provider = new ethers.providers.Web3Provider(ethereum);
+			const signer = provider.getSigner();
 			const balance = await provider.getBalance(state.account);
 			commit(
 				"updateBalance",
@@ -83,6 +80,8 @@ export const store = createStore({
 			});
 		},
 		async getContract({ commit }) {
+			const provider = new ethers.providers.Web3Provider(ethereum);
+			const signer = provider.getSigner();
 			const transactionContract = new ethers.Contract(
 				contractAddress,
 				contractABI,
