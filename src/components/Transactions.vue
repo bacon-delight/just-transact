@@ -61,7 +61,7 @@
 	</div>
 </template>
 
-<script lang="ts">
+<script lang="js">
 import { mapGetters } from "vuex";
 
 export default {
