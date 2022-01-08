@@ -20,10 +20,8 @@
 			<input v-model="address" type="text" placeholder="Address" />
 			<h6>Transaction Amount</h6>
 			<input v-model="amount" type="number" placeholder="Amount" />
-			<h6>Keyword</h6>
-			<input v-model="keyword" type="text" placeholder="Keyword" />
-			<h6>Message</h6>
-			<input v-model="message" type="text" placeholder="Message" />
+			<h6>Note</h6>
+			<input v-model="message" type="text" placeholder="Note" />
 			<button @click="submit">Send Transaction</button>
 		</div>
 		<Loading v-else />
@@ -55,22 +53,20 @@ export default defineComponent({
 	methods: {
 		async submit() {
 			this.loading = true;
-			if (
-				!this.address ||
-				!this.keyword ||
-				!this.message ||
-				!this.amount
-			) {
+			if (!this.address || !this.message || !this.amount) {
 				alert(
 					"All fields are mandatory and amount needs to be greater than 0"
 				);
 			} else {
-				await this.$store.dispatch("sendTransaction", {
+				const result = await this.$store.dispatch("sendTransaction", {
 					address: this.address,
 					amount: this.amount,
 					keyword: this.keyword,
 					message: this.message,
 				});
+				if (result.hash) {
+					this.$router.push("/success");
+				}
 			}
 			this.loading = false;
 		},

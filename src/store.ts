@@ -14,6 +14,7 @@ export const store = createStore({
 		connected: false,
 		account: "",
 		balance: 0,
+		transactions: [],
 	},
 	mutations: {
 		updateConnectionStatus(state, { status, account }) {
@@ -22,6 +23,9 @@ export const store = createStore({
 		},
 		updateBalance(state, balance) {
 			state.balance = balance;
+		},
+		storeTransactions(state, transactions) {
+			state.transactions = transactions;
 		},
 	},
 	actions: {
@@ -113,9 +117,17 @@ export const store = createStore({
 				const transactionCount =
 					await transactionContract.getTransactionCount();
 
-				console.log(transactionHash.hash, transactionCount.toNumber());
+				return {
+					hash: transactionHash.hash,
+					success: true,
+				};
+				// console.log(transactionHash.hash, transactionCount.toNumber());
 			} catch {
 				alert("Transaction could not be processed");
+				return {
+					hash: false,
+					success: false,
+				};
 			}
 		},
 		async change() {
@@ -128,6 +140,18 @@ export const store = createStore({
 				],
 			});
 		},
+		async loadTransactions({ dispatch, commit }) {
+			if (ethereum) {
+				const { transactionContract } = await dispatch("getContract");
+				try {
+					const transactions =
+						await transactionContract.getAllTransactions();
+					commit("storeTransactions", transactions);
+				} catch {
+					alert("Connect your wallet to see transactions");
+				}
+			}
+		},
 	},
 	getters: {
 		connection(state) {
@@ -138,6 +162,9 @@ export const store = createStore({
 		},
 		balance(state) {
 			return state.balance;
+		},
+		transactions(state) {
+			return state.transactions;
 		},
 	},
 });

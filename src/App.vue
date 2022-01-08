@@ -2,7 +2,8 @@
 	<div class="app">
 		<Navigation />
 		<div class="app__content">
-			<Content />
+			<!-- <Content /> -->
+			<router-view></router-view>
 		</div>
 	</div>
 </template>

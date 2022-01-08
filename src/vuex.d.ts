@@ -6,6 +6,7 @@ declare module "@vue/runtime-core" {
 		connected: boolean;
 		account: string;
 		balance: bigint;
+		transactions: any;
 	}
 
 	interface ComponentCustomProperties {
