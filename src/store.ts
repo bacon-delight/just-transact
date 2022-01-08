@@ -6,8 +6,10 @@ declare let window: any;
 declare let transactionHash: any;
 const { ethereum } = window;
 
-const provider = new ethers.providers.Web3Provider(ethereum);
-const signer = provider.getSigner();
+if (ethereum) {
+	const provider = new ethers.providers.Web3Provider(ethereum);
+	const signer = provider.getSigner();
+}
 
 export const store = createStore({
 	state: {
