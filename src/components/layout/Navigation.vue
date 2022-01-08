@@ -2,6 +2,7 @@
 	<nav class="navigation">
 		<i class="ri-flashlight-line navigation__icon"></i>
 		<router-link to="/" class="navigation__text">JustTransact</router-link>
+		<span class="network">@Ropsten</span>
 		<router-link
 			class="navigation__link navigation__link--first"
 			to="/transactions"
@@ -13,10 +14,6 @@
 <script lang="ts">
 export default {
 	name: "Navigation",
-
-	data() {
-		return {};
-	},
 };
 </script>
 
@@ -27,6 +24,7 @@ export default {
 	letter-spacing: 0.1rem;
 	display: flex;
 	align-items: center;
+	column-gap: 1rem;
 
 	&__icon,
 	&__text {
@@ -46,5 +44,10 @@ export default {
 			margin-left: auto;
 		}
 	}
+}
+
+.network {
+	font-size: 1.2rem;
+	color: #743ad5;
 }
 </style>
