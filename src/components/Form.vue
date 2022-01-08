@@ -2,14 +2,20 @@
 	<div class="form">
 		<div class="form__card">
 			<div class="card">
-				<img src="../../public/eth.png" alt="" class="card__img" />
+				<div class="card__logo">
+					<img src="../../public/eth.png" alt="" class="card__img" />
+					<div class="card__balance">
+						{{ parseFloat(balance).toFixed(5) }}
+					</div>
+				</div>
+
 				<h5>Connected</h5>
 				<h6>{{ account }}</h6>
 				<h3>Ethereum</h3>
 			</div>
 			<div @click="change" class="change">Switch Wallet</div>
 		</div>
-		<div class="form__inputs">
+		<div v-if="!loading" class="form__inputs">
 			<h6>Receiver Address</h6>
 			<input v-model="address" type="text" placeholder="Address" />
 			<h6>Transaction Amount</h6>
@@ -20,12 +26,14 @@
 			<input v-model="message" type="text" placeholder="Message" />
 			<button @click="submit">Send Transaction</button>
 		</div>
+		<Loading v-else />
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import { mapGetters } from "vuex";
+import Loading from "./Loading.vue";
 
 export default defineComponent({
 	name: "Form",
@@ -35,20 +43,43 @@ export default defineComponent({
 			amount: 0,
 			keyword: "",
 			message: "",
+			loading: false,
 		};
 	},
 	computed: {
 		...mapGetters({
 			account: "account",
+			balance: "balance",
 		}),
 	},
 	methods: {
-		submit() {
-			console.log(this.address, this.amount, this.keyword, this.message);
+		async submit() {
+			this.loading = true;
+			if (
+				!this.address ||
+				!this.keyword ||
+				!this.message ||
+				!this.amount
+			) {
+				alert(
+					"All fields are mandatory and amount needs to be greater than 0"
+				);
+			} else {
+				await this.$store.dispatch("sendTransaction", {
+					address: this.address,
+					amount: this.amount,
+					keyword: this.keyword,
+					message: this.message,
+				});
+			}
+			this.loading = false;
 		},
 		change() {
 			this.$store.dispatch("change");
 		},
+	},
+	components: {
+		Loading,
 	},
 });
 </script>
@@ -116,6 +147,12 @@ export default defineComponent({
 	grid-template-rows: min-content 1fr min-content min-content;
 	border: 1px solid #5c5c5c;
 	border-radius: 10px;
+
+	&__logo {
+		display: flex;
+		align-items: center;
+		column-gap: 1rem;
+	}
 
 	&__img {
 		height: 4rem;

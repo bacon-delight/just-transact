@@ -2,6 +2,7 @@
 	<nav class="navigation">
 		<i class="ri-flashlight-line navigation__icon"></i>
 		<span class="navigation__text">JustTransact</span>
+		<router-link to="/transactions">Transactions</router-link>
 	</nav>
 </template>
 
