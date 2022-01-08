@@ -1,10 +1,10 @@
 <template>
 	<div class="intro">
-		<h1 class="intro__header">Make your first permanent ETH transaction</h1>
+		<h1 class="intro__header">Make your first ETH transaction</h1>
 		<h3 class="intro__subheader">
 			Take the first step into Web 3.0 and make your first Etherium
-			transaction. Your transcation will be permanenet and will last
-			forever.
+			transaction. Your transcation will be public, permanent and will
+			last forever.
 		</h3>
 		<button @click="connect">Connect Wallet</button>
 	</div>
